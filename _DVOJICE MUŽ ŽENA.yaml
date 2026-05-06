@@ -1,6 +1,7 @@
 input: 'abcd,Gabbb,a,Cd,b$'
 blank: ' '
 start state: start
+final state: done
 table:
   start:
     ['a','b','c','d','e','f','g','A','B','C','D','E','F','G']: {L: znak_pre_nasobky}
@@ -385,7 +386,12 @@ table:
     l: {write: e, L}
     m: {write: f, L}
     n: {write: g, L}
-    ['a','b','c','d','e','f','g','A','B','C','D','E','F','G',',']: L
-    ' ': {R: done}
+    ['a','b','c','d','e','f','g','A','B','C','D','E','F','G',',']: R
+    '$': {R: to_done}
 
+  to_done:
+    1: R
+    $: {R: done}
+    
   done:
+    1: L
